@@ -1,0 +1,14 @@
+#user-uc {
+    padding: 16px;
+    border-radius: 8px;
+    background: white;
+}
+
+.user-image {
+    border-radius: 4px;
+}
+
+.user-name, .user-skill {
+    margin-top: 8px;
+    color: #2b2b2a;
+}
