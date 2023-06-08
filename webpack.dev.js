@@ -6,14 +6,22 @@ const SpeedMeasureWebpack = require('speed-measure-webpack-plugin');
 
 module.exports = {
     mode: "development",
-    entry: path.resolve(__dirname, "src/index.js"),
+    entry: path.join(__dirname, "src/index.js"),
     output: {
-        path: path.resolve(__dirname, "build"),
+        path: path.join(__dirname, "build"),
         filename: "bundle.js",
+        publicPath : "/"
+    },
+    resolve: {
+        alias : {
+            "@helpers" : path.join(__dirname, "src/helpers"),
+            "@assets" : path.join(__dirname, "src/assets"),
+            "@components" : path.join(__dirname, "src/components"),
+        }
     },
     devServer: {
         static: {
-            directory: path.resolve(__dirname, "public")
+            directory: path.join(__dirname, "public")
         },
         open: true,
         hot: true,
@@ -26,8 +34,8 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        outputPath: "/assets/fonts",
-                        publicPath: "/assets/fonts",
+                        outputPath: "assets/fonts",
+                        publicPath: "assets/fonts",
                         name: "[name].[ext]"
                     }
                 }
@@ -37,8 +45,8 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        outputPath: "/assets/images",
-                        publicPath: "/assets/images",
+                        outputPath: "assets/images",
+                        publicPath: "assets/images",
                         name: "[name].[ext]"
                     }
                 }
@@ -59,7 +67,8 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpack({
             filename: "index.html",
-            template: path.resolve(__dirname, "public/index.html")
+            template: path.join(__dirname, "public/index.html"),
+            inject : "body"
         }),
     ]
 }
