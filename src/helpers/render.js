@@ -1,0 +1,1 @@
+export default (element, container) => container.appendChild(element) 
