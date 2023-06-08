@@ -12,6 +12,14 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.[contenthash].js",
+        publicPath : "/"
+    },
+    resolve: {
+        alias : {
+            "@helpers" : path.join(__dirname, "src/helpers"),
+            "@assets" : path.join(__dirname, "src/assets"),
+            "@components" : path.join(__dirname, "src/components"),
+        }
     },
     module: {
         rules: [
@@ -20,8 +28,8 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        outputPath: "fonts",
-                        publicPath: "fonts",
+                        outputPath: "assets/fonts",
+                        publicPath: "assets/fonts",
                         name: "[name].[contenthash].[ext]"
                     }
                 }
@@ -32,8 +40,8 @@ module.exports = {
                     {
                         loader: "file-loader",
                         options: {
-                            outputPath: "images",
-                            publicPath: "images",
+                            outputPath: "assets/images",
+                            publicPath: "assets/images",
                             name: "[name].[contenthash].[ext]"
                         }
                     },
