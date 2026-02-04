@@ -1,13 +1,15 @@
-*{
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
-    color: #efefef;
+    color: #2b2b2a;
 }
 
 body {
+    background-color: #efefef;
     padding: 24px;
-    background: #2b2b2a;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
