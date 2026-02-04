@@ -1,10 +1,8 @@
-<h1 align="center">Webpack Config 🔥</h1>
-
-###
+<h1 align="center">React app with Webpack🔥</h1>
+<img src="https://github.com/hscgavin/webpack-setup-from-scratch/raw/master/doc_imgs/webpack.png?raw=true" />
 
 <div align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" height="40" alt="webpack logo"  />
-  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="javascript logo"  />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="40" alt="javascript logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="css3 logo"  />
@@ -16,18 +14,25 @@
 
 ###
 
-<h2 align="left">How to use it ?</h2>
+<h2 align="left">How to use it?</h2>
 
-###
+> First step:
 
-<p align="left">1️⃣ npm install<br>2️⃣ npm start ( Development ENV )<br>3️⃣ npm run build ( Production ENV )</p>
+Install all package dependencies from NPM
+```bash
+npm install
+```
 
-###
+> Second step:
 
-<h2 align="left">Config Options :</h2>
+After installing packages, then use this command to start the application as development env
+```bash
+npm start
+```
 
-###
+> Third step:
 
-<p align="left">⭐ Fast compiler<br><br>⭐ minifying CSS files<br><br>⭐ minifying JS files<br><br>⭐ minifying HTML files<br><br>⭐ Optimizing Assets<br><br>⭐ compiling SCSS to CSS<br><br>⭐ Handling Cache in the Browser ( Production Mode ) <br><br>⭐ Development Server<br><br>⭐ Hot Module Replacement<br><br>⭐ Custom Path<br><br>+ more options ...</p>
-
-###
+if you want to get final source for production env, you will use this command
+```bash
+npm run build
+```
