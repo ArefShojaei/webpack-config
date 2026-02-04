@@ -12,13 +12,13 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.[contenthash].js",
-        publicPath : "/"
+        publicPath: "/"
     },
     resolve: {
-        alias : {
-            "@helpers" : path.join(__dirname, "src/helpers"),
-            "@assets" : path.join(__dirname, "src/assets"),
-            "@components" : path.join(__dirname, "src/components"),
+        alias: {
+            "@": path.join(__dirname, "src"),
+            "@assets": path.join(__dirname, "src/assets"),
+            "@components": path.join(__dirname, "src/components")
         }
     },
     module: {
@@ -50,19 +50,43 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
+                exclude: /\.module\.s?css$/,
                 use: [
                     MiniCssExtract.loader,
                     "css-loader",
-                    "sass-loader"
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            api: "modern"
+                        }
+                    }
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.module\.s?css$/,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            api: "modern"
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/preset-env",]
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
                     }
                 }
             }
@@ -76,12 +100,12 @@ module.exports = {
         new HtmlWebpack({
             filename: "index.html",
             template: path.resolve(__dirname, "public/index.html"),
-            inject : "body"
+            inject: "body"
         }),
         new WebpackBuildNotifierPlugin({
             title: "Webpack compiler ( Production ENV )",
             suppressSuccess: true,
-            showDuration : true,
-        }),
+            showDuration: true
+        })
     ]
-}
+};

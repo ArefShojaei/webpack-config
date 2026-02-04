@@ -10,13 +10,13 @@ module.exports = {
     output: {
         path: path.join(__dirname, "build"),
         filename: "bundle.js",
-        publicPath : "/"
+        publicPath: "/"
     },
     resolve: {
-        alias : {
-            "@helpers" : path.join(__dirname, "src/helpers"),
-            "@assets" : path.join(__dirname, "src/assets"),
-            "@components" : path.join(__dirname, "src/components"),
+        alias: {
+            "@": path.join(__dirname, "src"),
+            "@assets": path.join(__dirname, "src/assets"),
+            "@components": path.join(__dirname, "src/components")
         }
     },
     devServer: {
@@ -25,7 +25,7 @@ module.exports = {
         },
         open: true,
         hot: true,
-        port: 9000,
+        port: 9000
     },
     module: {
         rules: [
@@ -53,12 +53,46 @@ module.exports = {
             },
             {
                 test: /\.s?css$/,
+                exclude: /\.module\.s?css$/,
                 use: [
                     "style-loader",
                     "css-loader",
-                    "sass-loader"
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            api: "modern"
+                        }
+                    }
                 ]
             },
+            {
+                test: /\.module\.css$/,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true
+                        }
+                    },
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            api: "modern"
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(jsx?)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                    }
+                }
+            }
         ]
     },
     plugins: [
@@ -68,7 +102,7 @@ module.exports = {
         new HtmlWebpack({
             filename: "index.html",
             template: path.join(__dirname, "public/index.html"),
-            inject : "body"
-        }),
+            inject: "body"
+        })
     ]
-}
+};
