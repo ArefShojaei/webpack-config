@@ -1,23 +1,11 @@
-const path = require('path');
-const Webpackbar = require('webpackbar');
-const HtmlWebpack = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const SpeedMeasureWebpack = require('speed-measure-webpack-plugin');
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common");
+const path = require("path");
 
-module.exports = {
+module.exports = merge(common, {
     mode: "development",
-    entry: path.join(__dirname, "src/index.js"),
     output: {
-        path: path.join(__dirname, "build"),
-        filename: "bundle.js",
-        publicPath: "/"
-    },
-    resolve: {
-        alias: {
-            "@": path.join(__dirname, "src"),
-            "@assets": path.join(__dirname, "src/assets"),
-            "@components": path.join(__dirname, "src/components")
-        }
+        filename: "[name].js"
     },
     devServer: {
         static: {
@@ -82,27 +70,7 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.(jsx?)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"]
-                    }
-                }
             }
         ]
-    },
-    plugins: [
-        new Webpackbar({ name: "Processes :" }),
-        new SpeedMeasureWebpack(),
-        new CleanWebpackPlugin(),
-        new HtmlWebpack({
-            filename: "index.html",
-            template: path.join(__dirname, "public/index.html"),
-            inject: "body"
-        })
-    ]
-};
+    }
+});
